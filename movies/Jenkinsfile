@@ -88,7 +88,8 @@ pipeline {
         }
 
         stage('Wait for deployment in DEV env') {
-	  script {
+	  steps {
+	    script {
                     routeHost = readFile('routehost').trim()
 
                     openshift.withCluster() {
@@ -101,6 +102,7 @@ pipeline {
                         echo "Deployment to Development env is complete. Access the API endpoint at the URL http://${routeHost}/movies."
                     }
                 }
+	  }
 
         }
 
